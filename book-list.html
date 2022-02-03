@@ -1,0 +1,66 @@
+<!-- Using .onClick function to create a list of items and to delete items on the list
+    using .querySelector to able to create variables out of the elements needed to carry out the functions
+    using .createElement to create new Elements into variaibles and sotre them into the HTML
+    using .appendChild to store the created elements into the list item variable-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book list example</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li button {
+        font-size: 8px;
+        margin-left: 20px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>My Book list</h1>
+
+    <div>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="item">
+      <button>Add item</button>
+    </div>
+
+    <ul>
+    
+    </ul>
+
+    <script>
+    const input = document.querySelector('input'); // using .querySelector to create variabes that will hold references to the list 
+    const list = document.querySelector('ul');
+    const button = document.querySelector('button');
+
+    button.onclick = function() { // using .onclick to create a function that responses to the button being clicked 
+        let newItem = input.value; // the function can store the value inputted 
+        input.value = '';
+
+        const listItem = document.createElement('li'); // using .createElement to create new elements to store into variables 
+        const listSpan = document.createElement('span');
+        const listButton = document.createElement('button');
+
+        listItem.appendChild(listSpan); // appending items into the list variable
+        listSpan.textContent = newItem;
+        listItem.appendChild(listButton);
+        listButton.textContent = 'delete';
+        list.appendChild(listItem);
+
+        listButton.onclick = function(e) { // using .onclick to create a function that reponses to the delete button
+            list.removeChild(listItem); // using .removeChild to delete the list item once the function button is acted
+        }
+    }
+
+    input.focus(); // use .focus() to focus on the input element so its ready for entering the next list item 
+
+    </script>
+  </body>
+</html>
